@@ -281,11 +281,15 @@
 
 <!-- 지원사업 2 : 풀필먼트 지원 (절차 + 프로세스 하나의 카드) -->
 <div class="program-section">
-  <div class="program-label">
-    <span class="program-badge-num green">지원사업 2</span>
-    <span class="program-label-title">풀필먼트 지원</span>
+  <div class="program-label" style="justify-content: space-between; cursor: pointer;" onclick="toggleFF()">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <span class="program-badge-num green">지원사업 2</span>
+      <span class="program-label-title">풀필먼트 지원</span>
+      <span style="background: #fee2e2; color: #b91c1c; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 20px; letter-spacing: 0.03em;">모집종료</span>
+    </div>
+    <span id="ff-arrow" style="font-size: 12px; color: var(--text-muted);">▼ 펼치기</span>
   </div>
-  <div style="border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+  <div id="ff-body" style="display: none; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
     <div class="process-card green-ver" style="border-radius: 0; border: none;">
       <div class="process-header">
         <span style="font-size: 20px;">📦</span>
@@ -346,8 +350,8 @@
         <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">중진공이 셀러에게<br>이용료의 70% 직접 환급</div></div>
       </div>
     </div>
-  </div>
-</div>
+  </div><!-- /ff-body -->
+</div><!-- /program-section -->
 </div><!-- /card: 사업 진행 절차 -->
 
   <div class="card">
@@ -355,13 +359,13 @@
     <div class="sec-title">중점 배송국가 항공 운임 (중진공 협약 단가)</div>
     
     <div class="tab-row">
-      <button class="tab-btn active" onclick="showTab(event,&#39;jp&#39;)">일본 Standard</button>
-      <button class="tab-btn" onclick="showTab(event,&#39;jpe&#39;)">일본 Economy</button>
-      <button class="tab-btn" onclick="showTab(event,&#39;us&#39;)">미국</button>
-      <button class="tab-btn" onclick="showTab(event,&#39;sg&#39;)">싱가포르</button>
-      <button class="tab-btn" onclick="showTab(event,&#39;cn&#39;)">중국</button>
-      <button class="tab-btn" onclick="showTab(event,&#39;tw&#39;)">대만</button>
-      <button class="tab-btn" onclick="showTab(event,&#39;ph&#39;)">필리핀</button>
+      <button class="tab-btn active" onclick="showTab(event,'jp')">일본 Standard</button>
+      <button class="tab-btn" onclick="showTab(event,'jpe')">일본 Economy</button>
+      <button class="tab-btn" onclick="showTab(event,'us')">미국</button>
+      <button class="tab-btn" onclick="showTab(event,'sg')">싱가포르</button>
+      <button class="tab-btn" onclick="showTab(event,'cn')">중국</button>
+      <button class="tab-btn" onclick="showTab(event,'tw')">대만</button>
+      <button class="tab-btn" onclick="showTab(event,'ph')">필리핀</button>
     </div>
 
     <div id="tab-jp" class="tab-panel active">
@@ -400,15 +404,18 @@
       </table></div>
       <div class="note">※ KRW 기준, 유류할증료 별도</div>
     </div>
+
+    <!-- ★ 중국향 운임: 2026-06-19 변경후 단가 반영 -->
     <div id="tab-cn" class="tab-panel">
       <div class="tbl-wrap"><table>
         <thead><tr><th>중량(kg) (배송: 2~6일)</th><th>단가 (KRW)</th></tr></thead>
         <tbody>
-          <tr><td>0.5kg</td><td class="hi">7,000</td></tr><tr><td>1.0kg</td><td class="hi">8,300</td></tr><tr><td>2.0kg</td><td class="hi">11,000</td></tr><tr><td>5.0kg</td><td class="hi">18,900</td></tr><tr><td>10.0kg</td><td class="hi">32,100</td></tr>
+          <tr><td>0.1kg</td><td class="hi">4,200</td></tr><tr><td>0.5kg</td><td class="hi">8,800</td></tr><tr><td>1.0kg</td><td class="hi">13,300</td></tr><tr><td>2.0kg</td><td class="hi">19,800</td></tr><tr><td>5.0kg</td><td class="hi">36,800</td></tr><tr><td>10.0kg</td><td class="hi">52,200</td></tr>
         </tbody>
       </table></div>
       <div class="note">※ KRW 기준, 유류할증료 별도</div>
     </div>
+
     <div id="tab-tw" class="tab-panel">
       <div class="tbl-wrap"><table>
         <thead><tr><th>중량(kg) (배송: 3~10일)</th><th>단가 (KRW)</th></tr></thead>
@@ -524,6 +531,13 @@ function showTab(e, id) {
 }
 function toggleFaq(el) {
   el.parentElement.classList.toggle('open');
+}
+function toggleFF() {
+  var body = document.getElementById('ff-body');
+  var arrow = document.getElementById('ff-arrow');
+  var open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  arrow.textContent = open ? '▼ 펼치기' : '▲ 접기';
 }
 </script>
 
